@@ -7,10 +7,10 @@ import android.view.ViewGroup
 import android.widget.CheckBox
 import android.widget.TextView
 
-class TaskAdapter(var tasks: MutableList<Task>) : RecyclerView.Adapter<TaskAdapter.TaskViewHolder>() {
+class TaskAdapter(var tasks: MutableList<Task> = ArrayList()) : RecyclerView.Adapter<TaskAdapter.TaskViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TaskViewHolder {
         val context = parent.context
-        val view = LayoutInflater.from(context).inflate(R.layout.todo_list, parent, false)
+        val view = LayoutInflater.from(context).inflate(R.layout.todo_item_row, parent, false)
         return TaskViewHolder(view)
     }
 
@@ -20,6 +20,11 @@ class TaskAdapter(var tasks: MutableList<Task>) : RecyclerView.Adapter<TaskAdapt
 
     override fun onBindViewHolder(holder: TaskViewHolder, position: Int) {
         holder.bindTask(tasks[position])
+    }
+
+    fun addTask(task: Task) {
+        tasks.add(task)
+        notifyDataSetChanged()
     }
 
     inner class TaskViewHolder(view: View) : RecyclerView.ViewHolder(view) {
