@@ -3,10 +3,12 @@ package com.dalydays.android.aetodo
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager
 import android.view.Menu
 import android.view.MenuItem
 
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.content_main.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -19,6 +21,16 @@ class MainActivity : AppCompatActivity() {
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                     .setAction("Action", null).show()
         }
+
+        task_list.layoutManager = LinearLayoutManager(this)
+        task_list.adapter = TaskAdapter(getSimpleTasks())
+    }
+
+    private fun getSimpleTasks() : MutableList<Task> {
+        val task1 = Task("task1")
+        val task2 = Task("task2", true)
+
+        return mutableListOf(task1, task2)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
