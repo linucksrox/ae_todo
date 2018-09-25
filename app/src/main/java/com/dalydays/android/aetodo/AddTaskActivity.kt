@@ -13,11 +13,11 @@ class AddTaskActivity : AppCompatActivity() {
         setContentView(R.layout.activity_add_task)
 
         submit?.setOnClickListener {
-            if (task_description?.text?.toString().isNullOrBlank()) {
-               task_description?.error = "Please enter a description"
+            if (task_description.text?.toString().isNullOrBlank()) {
+               task_description.error = "Please enter a description"
             } else {
                 val data = Intent()
-                data.putExtra(MainActivity.DESCRIPTION_TEXT, task_description?.text.toString())
+                data.putExtra(MainActivity.DESCRIPTION_TEXT, task_description.text.toString())
                 setResult(Activity.RESULT_OK, data)
 
                 finish()
