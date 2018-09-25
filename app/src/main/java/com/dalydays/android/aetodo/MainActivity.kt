@@ -34,6 +34,22 @@ class MainActivity : AppCompatActivity() {
         task_list.adapter = TaskAdapter(getSimpleTasks())
     }
 
+    override fun onResume() {
+        super.onResume()
+
+        val tasks = Storage.readData(this)
+
+        if (tasks != null && (adapter.tasks.isEmpty())) {
+            adapter.tasks = tasks
+        }
+    }
+
+    override fun onPause() {
+        super.onPause()
+
+        Storage.writeData(this, adapter.tasks)
+    }
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (requestCode == ADD_TASK_REQUEST && resultCode == Activity.RESULT_OK) {
             val task = Task(data?.getStringExtra(DESCRIPTION_TEXT).orEmpty())
